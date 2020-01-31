@@ -30,7 +30,8 @@ At one point in working on this project, I found out about a different GUI tool 
 for games in Python called pygame. After researching and learning pygame, I decided to 
 stick with tkinter because it allowed for an easier creation of a game menu in my opinion.
 Tkinter was also adequate for what I was doing so there wouldn't have been much to gain
-by switching to pygame.
+by switching to pygame. It was adequate at the time I made that decision, but I did run 
+into a problem later on that is described below.
 
 ## Problems
 I tried to make a two player mode where one paddle would be on the bottom of the screen
