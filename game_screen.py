@@ -17,7 +17,7 @@ class GameScreen:
         self.__canvas.place(rely=0.05, relheight=0.85)
         bottom_frame.place(rely=0.9, relheight=0.1, relwidth=1)
 
-        self.__starting_number_of_lives = 2
+        self.__starting_number_of_lives = 3
         self.__lives_left = self.__starting_number_of_lives
         self.__score = 0
 
