@@ -4,9 +4,9 @@ is to prevent it from hitting the bottom by moving the paddle. The colors of the
 background, ball, and paddle are up to you, as well as the choice of an easy, medium, and
 hard difficulty.
 
-## Directions
+## Directions for running the program
 1. Clone this repository
-2. Run main.py using Python
+2. Run main.py using Python. This program was made and tested using Python 3.7.
 
 ## The beginning
 This project started off as an assignment for CSC 131: Computational Thinking, which
