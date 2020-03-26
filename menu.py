@@ -7,7 +7,6 @@ class Menu(tkinter.Frame):
     # on the menu is clicked
     def __init__(self, root, height, width, play_function):
         super().__init__(root, height=height, width=width)
-        #self.__main_frame = tkinter.Frame(root, height=height, width=width)
 
         # Colors are for the ball, paddle, and background color option menus in the menu
         self.__colors = ('Bisque', 'Black', 'Blue', 'Cyan', 'Dark Goldenrod', 'Deep Pink',

@@ -1,17 +1,17 @@
 import tkinter
 
 
-class GameScreen:
+class GameScreen(tkinter.Frame):
     def __init__(self, root, height, width):
-        self.__main_frame = tkinter.Frame(root, height=height, width=width)
+        super().__init__(root, height=height, width=width)
 
         self.__canvas_height = height * 0.85
         self.__canvas_width = width
 
-        top_frame = tkinter.Frame(self.__main_frame)
-        self.__canvas = tkinter.Canvas(self.__main_frame, width=self.__canvas_width,
+        top_frame = tkinter.Frame(self)
+        self.__canvas = tkinter.Canvas(self, width=self.__canvas_width,
                                        height=self.__canvas_height)
-        bottom_frame = tkinter.Frame(self.__main_frame)
+        bottom_frame = tkinter.Frame(self)
 
         top_frame.place(relheight=0.05, relwidth=1)
         self.__canvas.place(rely=0.05, relheight=0.85)
@@ -56,10 +56,10 @@ class GameScreen:
         return self.__quit_bool
 
     def show(self):
-        self.__main_frame.pack()
+        self.pack()
 
     def hide(self):
-        self.__main_frame.pack_forget()
+        self.pack_forget()
 
     def set_canvas_color(self, color):
         self.__canvas.config(bg=color)
