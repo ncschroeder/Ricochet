@@ -1,35 +1,22 @@
 class Ball:
     """
-    canvas_info is a dictionary containing a canvas object and the height and width
-    of that canvas. The canvas object is needed so that the ball object can create and
-    move the ball on the canvas. The height and width are needed so the ball object
-    knows how far it can travel in all directions.
-
-    The paddle top y coord is needed so the ball object knows when to check if it
-    has hit the paddle.
+    The canvas object is needed so that the ball object can create and move the 
+    ball on the canvas. The height and width are needed so the ball object knows 
+    how far it can travel in all directions. The paddle top y coord is needed 
+    so the ball object knows when to check if it has hit the paddle.
     """
-    def __init__(self, canvas_info, paddle_top_y_coord):
-
-        self.__canvas = canvas_info['canvas']
-        canvas_width = canvas_info['width']
-        canvas_height = canvas_info['height']
-
-        self.__diameter = 20
-
+    def __init__(self, canvas, canvas_height, width, paddle_top_y_coord):
+        self.__canvas = canvas
+        self.__DIAMETER = 20
         # Starting coordinates
         self.__left_x_coord = 0
-        self.__right_x_coord = self.__diameter
         self.__top_y_coord = 0
-        self.__bottom_y_coord = self.__diameter
 
-        # The left x and top y coordinates are the only ones that get changed
-        # so we need to set their limits
-        self.__max_left_x_coord = canvas_width - self.__diameter
-        self.__max_top_y_coord = canvas_height - self.__diameter
+        self.__max_left_x_coord = width - self.__DIAMETER
+        self.__max_top_y_coord = canvas_height - self.__DIAMETER
 
-        # Use the canvas object given to us to create an oval in the top left corner
-        self.__canvas.create_oval(self.__left_x_coord, self.__top_y_coord, self.__right_x_coord,
-                                  self.__right_x_coord, tags='ball')
+        # Use the canvas object to create an oval in the top left corner
+        self.__canvas.create_oval(0, 0, self.__DIAMETER, self.__DIAMETER, tags='ball')
 
         # Can't set a value for speeds yet since they change based
         # on what difficulty the user selects
@@ -37,7 +24,7 @@ class Ball:
         self.__horizontal_speed = 0
 
         # Paddle meet point is for the top y coordinate of the ball
-        paddle_meet_point = paddle_top_y_coord - self.__diameter
+        paddle_meet_point = paddle_top_y_coord - self.__DIAMETER
 
         """
         Need a paddle meet range because the speed below will be a floating point number 
@@ -52,13 +39,12 @@ class Ball:
         self.__easy_speed = round(paddle_meet_point / 200, 3)
         self.__medium_speed = round(paddle_meet_point / 150, 3)
         self.__hard_speed = round(paddle_meet_point / 100, 3)
-
+    
     def set_color(self, color):
         # Use the canvas object to change the ball's color
         self.__canvas.itemconfig('ball', fill=color)
 
     def set_difficulty(self, difficulty):
-
         if difficulty == 'Easy':
             self.__vertical_speed = self.__easy_speed
             self.__horizontal_speed = self.__easy_speed
@@ -102,7 +88,7 @@ class Ball:
 
     def has_hit_paddle(self, paddle_left_x_coord, paddle_right_x_coord):
         return paddle_left_x_coord <= self.__left_x_coord <= paddle_right_x_coord or \
-               paddle_left_x_coord <= self.__left_x_coord + self.__diameter <= paddle_right_x_coord
+               paddle_left_x_coord <= self.__left_x_coord + self.__DIAMETER <= paddle_right_x_coord
 
     def change_vertical_direction(self):
         self.__vertical_speed *= -1
@@ -111,9 +97,7 @@ class Ball:
         self.__horizontal_speed *= -1
 
     def reset(self):
-        # Only need to reset these 2 variables since they are the ones that change
         self.__left_x_coord = 0
         self.__top_y_coord = 0
         # Use the canvas object to put the ball back in the top left corner
-        self.__canvas.coords('ball', self.__left_x_coord, self.__top_y_coord,
-                             self.__right_x_coord, self.__bottom_y_coord)
+        self.__canvas.coords('ball', 0, 0, self.__DIAMETER, self.__DIAMETER)

@@ -2,23 +2,19 @@ import tkinter
 
 
 class GameScreen(tkinter.Frame):
-    def __init__(self, root, height, width):
+    def __init__(self, root, height, width, canvas_height):
         super().__init__(root, height=height, width=width)
 
-        self.__canvas_height = height * 0.85
-        self.__canvas_width = width
-
         top_frame = tkinter.Frame(self)
-        self.__canvas = tkinter.Canvas(self, width=self.__canvas_width,
-                                       height=self.__canvas_height)
+        self.__canvas = tkinter.Canvas(self, width=width, height=canvas_height)
         bottom_frame = tkinter.Frame(self)
 
         top_frame.place(relheight=0.05, relwidth=1)
         self.__canvas.place(rely=0.05, relheight=0.85)
         bottom_frame.place(rely=0.9, relheight=0.1, relwidth=1)
 
-        self.__starting_number_of_lives = 3
-        self.__lives_left = self.__starting_number_of_lives
+        self.__STARTING_NUMBER_OF_LIVES = 3
+        self.__lives_left = self.__STARTING_NUMBER_OF_LIVES
         self.__score = 0
 
         self.__lives_label = tkinter.Label(top_frame, text='Lives left: ' +
@@ -48,7 +44,7 @@ class GameScreen(tkinter.Frame):
     def set_quit_bool_true(self, event):
         self.__quit_bool = True
 
-    def set_quit_bool_false(self):
+    def reset_quit_bool(self):
         self.__quit_bool = False
 
     @property
@@ -61,14 +57,12 @@ class GameScreen(tkinter.Frame):
     def hide(self):
         self.pack_forget()
 
-    def set_canvas_color(self, color):
+    def set_background_color(self, color):
         self.__canvas.config(bg=color)
 
-    # Canvas info is for the ball and paddle objects
     @property
-    def canvas_info(self):
-        return {'canvas': self.__canvas, 'width': self.__canvas_width,
-                'height': self.__canvas_height}
+    def canvas(self):
+        return self.__canvas
 
     # Canvas needs to be updated in each frame
     def update_canvas(self):
@@ -88,7 +82,7 @@ class GameScreen(tkinter.Frame):
         self.__score_label.config(text='Score: ' + str(self.__score))
 
     def reset(self):
-        self.__lives_left = self.__starting_number_of_lives
+        self.__lives_left = self.__STARTING_NUMBER_OF_LIVES
         self.__lives_label.config(text='Lives left: ' + str(self.__lives_left))
 
         self.__score = 0

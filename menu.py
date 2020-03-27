@@ -70,16 +70,20 @@ class Menu(tkinter.Frame):
     def hide(self):
         self.pack_forget()
 
-    def get_difficulty(self):
+    @property
+    def difficulty(self):
         return self.__difficulty.get()
 
-    def get_ball_color(self):
+    @property
+    def ball_color(self):
         return self.__ball_color.get()
 
-    def get_paddle_color(self):
+    @property
+    def paddle_color(self):
         return self.__paddle_color.get()
 
-    def get_background_color(self):
+    @property
+    def background_color(self):
         return self.__background_color.get()
 
     def generate_random_colors(self):
