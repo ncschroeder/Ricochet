@@ -1,10 +1,11 @@
 class Ball:
     """
-    The canvas object is needed so that the ball object can create and move the 
-    ball on the canvas. The height and width are needed so the ball object knows 
-    how far it can travel in all directions. The paddle top y coord is needed 
+    The canvas object is needed so that the ball object can create and move the
+    ball on the canvas. The height and width are needed so the ball object knows
+    how far it can travel in all directions. The paddle top y coord is needed
     so the ball object knows when to check if it has hit the paddle.
     """
+
     def __init__(self, canvas, canvas_height, width, paddle_top_y_coord):
         self.__canvas = canvas
         self.__DIAMETER = 20
@@ -15,7 +16,7 @@ class Ball:
         self.__max_left_x_coord = width - self.__DIAMETER
         self.__max_top_y_coord = canvas_height - self.__DIAMETER
 
-        # Use the canvas object to create an oval in the top left corner
+        # Create an oval in the top left corner
         self.__canvas.create_oval(0, 0, self.__DIAMETER, self.__DIAMETER, tags='ball')
 
         # Can't set a value for speeds yet since they change based
@@ -39,9 +40,8 @@ class Ball:
         self.__easy_speed = round(paddle_meet_point / 200, 3)
         self.__medium_speed = round(paddle_meet_point / 150, 3)
         self.__hard_speed = round(paddle_meet_point / 100, 3)
-    
+
     def set_color(self, color):
-        # Use the canvas object to change the ball's color
         self.__canvas.itemconfig('ball', fill=color)
 
     def set_difficulty(self, difficulty):
@@ -64,9 +64,8 @@ class Ball:
         self.__left_x_coord += self.__horizontal_speed
         self.__top_y_coord += self.__vertical_speed
 
-        # Use the canvas object to move the ball. Note that a positive horizontal
-        # speed means the ball is moving right and a positive vertical speed means
-        # the ball is moving down.
+        # A positive horizontal speed means the ball is moving right and
+        # a positive vertical speed means the ball is moving down.
         self.__canvas.move('ball', self.__horizontal_speed, self.__vertical_speed)
 
     @property
@@ -99,5 +98,5 @@ class Ball:
     def reset(self):
         self.__left_x_coord = 0
         self.__top_y_coord = 0
-        # Use the canvas object to put the ball back in the top left corner
+        # Put the ball back in the top left corner
         self.__canvas.coords('ball', 0, 0, self.__DIAMETER, self.__DIAMETER)

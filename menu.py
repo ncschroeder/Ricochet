@@ -92,12 +92,12 @@ class Menu(tkinter.Frame):
 
         # The following code prevents the ball and paddle from
         # becoming the same color as the background
-        ball_color_index = randrange(len(self.__colors))
-        while ball_color_index == background_color_index:
-            ball_color_index = randrange(len(self.__colors))
-        self.__ball_color.set(self.__colors[ball_color_index])
+        color_index = randrange(len(self.__colors))
+        while color_index == background_color_index:
+            color_index = randrange(len(self.__colors))
+        self.__ball_color.set(self.__colors[color_index])
 
-        paddle_color_index = randrange(len(self.__colors))
-        while paddle_color_index == background_color_index:
-            paddle_color_index = randrange(len(self.__colors))
-        self.__paddle_color.set(self.__colors[paddle_color_index])
+        color_index = randrange(len(self.__colors))
+        while color_index == background_color_index:
+            color_index = randrange(len(self.__colors))
+        self.__paddle_color.set(self.__colors[color_index])

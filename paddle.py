@@ -1,27 +1,29 @@
 class Paddle:
     """
     The canvas object is needed so the paddle object can create and
-    move the paddle on the canvas. The canvas height lets the paddle know where 
-    it should be placed, which is at the bottom of the canvas. The width lets 
+    move the paddle on the canvas. The canvas height lets the paddle know where
+    it should be placed, which is at the bottom of the canvas. The width lets
     the paddle know how far to the left or right it can travel.
     """
+
     def __init__(self, canvas, canvas_height, canvas_width):
         self.__canvas = canvas
         self.__canvas_width = canvas_width
 
-        # Use the canvas object to create a rectangle representing the paddle. 
-        # We can't give it any coordinates yet since how wide it is depends 
-        # on the difficulty the user chooses.
+        # Create a rectangle representing the paddle. We can't give it any
+        # coordinates yet since how wide it is depends on the difficulty
+        # the user chooses.
         self.__canvas.create_rectangle(0, 0, 0, 0, tags='paddle')
 
-        # Moving distance depends on the difficulty the user chooses so 
-        # we can't assign a value to it yet.
+        # These values depend on the difficulty the user chooses so
+        # we can't assign a value to them yet.
         self.__moving_distance = 0
         self.__paddle_width = 0
+
         self.__middle_of_start_point = canvas_width // 2
 
         # Only need to use the left x coord to keep track of position.
-        # Can't give these a value yet since how wide the paddle 
+        # Can't give these a value yet since how wide the paddle
         # is depends on the difficulty the user selects
         self.__left_x_coord = 0
         self.__max_left_x_coord = 0
@@ -46,7 +48,7 @@ class Paddle:
     @property
     def top_y_coord(self):
         return self.__top_y_coord
-    
+
     def set_color(self, color):
         # Use the canvas object to change the paddle's color
         self.__canvas.itemconfig('paddle', fill=color)
@@ -66,13 +68,12 @@ class Paddle:
             self.__left_x_coord = self.__middle_of_start_point - 20
             self.__paddle_width = 40
             self.__moving_distance = 30
-        
+
         self.__max_left_x_coord = self.__canvas_width - self.__paddle_width
 
     def place_on_canvas(self):
-        # Use the canvas object to place the paddle in the right spot on the canvas
         self.__canvas.coords('paddle', self.__left_x_coord, self.__top_y_coord,
-            self.__left_x_coord + self.__paddle_width, self.__bottom_y_coord)
+                             self.__left_x_coord + self.__paddle_width, self.__bottom_y_coord)
 
     def move_left(self, event):
         if self.__left_x_coord >= self.__moving_distance:
